@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Twitter</title>
+
+</head>
+<body>
+
+{% if myuser %}
+<h1 >Twitter! &nbsp;&nbsp;&nbsp;
+    <p >Login User id: {{ myuser.user_name }} </p>
+
+    <button  style="height:30px; width:100px"  onclick="location.href='/editprofile?user_id={{myuser.key.id()}}'" type="button">
+        View Profile
+    </button>
+
+    <button    onclick="location.href='{{ url }}'" type="button">
+        Logout
+    </button>`
+</h1>
+
+{% if myuser.user_name | length == 0 %}
+
+<form method="Get">
+</br>
+        <p style="text-align: center;"><strong style="color: #000;">You have to set userid  </strong> &nbsp;&nbsp;&nbsp;
+        <input name="user_name" type="text" value="" pattern="[A-Za-z]*"  align="center" title="Alphabet characters only" minlength=3>
+        </br></br>
+            <textarea rows="4" cols="50" name="about_me" maxlength="250"></textarea>
+            </br>
+        </p>
+    <input type="submit" value="Set Username" />
+
+</form>
+
+{% else %}
+
+<br />
+<form method="Get">
+
+    <p ><b >Search User/Post </b> &nbsp;&nbsp;&nbsp;
+        <input name="search_text" type="text" value="" pattern="[A-Za-z]*"  align="center" title="Alphabet characters only" minlength=2>&nbsp;&nbsp;&nbsp;
+        <select name="query_type">
+            <option value="user">All</option>
+            <option value="user">User</option>
+            <option value="post">Post</option>
+        </select>
+        <input type="submit" value="Search" />
+
+</form>
+
+<form method="Post" enctype="multipart/form-data">
+
+&nbsp;&nbsp;<textarea rows="4" cols="50" name="share_text" maxlength="250">{% if edittweet %}{{edittweet.share_text}}{% endif %}</textarea>
+</br>
+        &nbsp;&nbsp;<input type="file" name="share_image" accept="image/*"/>
+    &nbsp;&nbsp;&nbsp;<input type="submit" value="{% if edittweet  %}Update{% else %}Share{% endif %}" name = "share_type"/>
+    <input type="hidden" value="{% if edittweet  %} {{edittweet.key.id()}}{% endif %}" name = "edit_tweet_id"/>
+</form>
+
+
+<div >
+  <ul>
+{% for tweet in tweets %}
+      <form method="Get">
+<li>
+      <img src="" />
+      <h3><a href="/editprofile?user_id={{ tweet.user_id }}">{{ tweet.user_name }}</a></h3>
+      <p>{{tweet.share_text}}</p>
+      <p align="right"> {{tweet.time}}</p>
+
+    {% if tweet.user_id ==  myuser.key.id() %}
+        <input type="hidden" value="{{ tweet.key.id() }}" name = "tweet_id" hidden/>
+        <input type="submit" value="Delete" name = "query_type"/>
+        <input type="submit" value="Edit" name = "query_type"/>
+    {% endif %}
+</li>
+          </form>
+
+{% endfor %}
+  </ul>
+</div>
+
+
+{% endif %}
+
+{% else %}
+<h1 > Twitter!
+    <button  style="height:40px; width:80px"  onclick="location.href='{{ url }}'" type="button">
+        LOGIN
+    </button>
+</h1>
+<p ><b>You must login </b></p>
+
+{% endif %}
+
+
+</body>
+</html>
+
+
