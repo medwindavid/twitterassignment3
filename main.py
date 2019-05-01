@@ -24,7 +24,6 @@ from google.appengine.ext import blobstore
 import datetime
 
 
-
 from myuser import MyUser
 
 JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -37,7 +36,7 @@ class MainHandler(webapp2.RequestHandler):
         self.response.headers["Content-Type"] = "text/html"
         user = Services().get_current_user()
         myuser = None
-        tweets = None
+        tweets = 
         edittweet = None
 
         if user:
