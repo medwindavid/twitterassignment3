@@ -53,7 +53,7 @@ class Methods(object):
         posts = posts_key.get()
         return posts
 
-    def get_all_user_posts(self):
+    def get_all_user_postss(self):
 
         myuser = Methods().get_login_user()
         postss = []

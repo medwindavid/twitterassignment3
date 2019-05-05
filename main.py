@@ -90,10 +90,10 @@ class MainHandler(webapp2.RequestHandler):
 
                 if query_type == "Edit":
                     editposts = Methods().get_posts(posts_id= posts_id)
-                    posts = Methods().get_all_user_posts()
+                    postss = Methods().get_all_user_postss()
                 else:
                     Methods().delete_posts(posts_id= posts_id)
-                    posts = Methods().get_all_user_posts()
+                    postss = Methods().get_all_user_postss()
 
             else:
                 postss = []
