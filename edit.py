@@ -54,7 +54,7 @@ class Edit(webapp2.RedirectHandler):
         if self.request.get("update_user") == "Update":
 
             if self.request.get("date") == "" or user_id == "":
-                self.redirect("/edit")
+                self.redirect("/edit?user_id={}".format(user_id))
                 return
 
             myuser = Methods().get_login_user()
@@ -70,7 +70,7 @@ class Edit(webapp2.RedirectHandler):
             myuser.about_me = about_me
             myuser.put()
 
-            self.redirect("/")
+            self.redirect("/edit?user_id={}".format(user_id))
 
         elif self.request.get("follow_user") == "Follow" or self.request.get("follow_user") == "Unfollow":
 
