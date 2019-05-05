@@ -11,10 +11,37 @@
             background-color: azure;
         }
         .header {
-            background-color: darkgoldenrod;
-            padding: 20px;
-            text-align: center;
-         }
+  overflow: hidden;
+  background-color: #333;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: #4CAF50;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
         h1{
             font: full-width;
             color: #2196F3;
@@ -106,9 +133,11 @@
 	}
 
  .container {
-          border-radius: 5px;
-          background-color: #f2f2f2;
+          border-radius: 50px;
+          background-color: ThreeDLightShadow;
           padding: 20px;
+
+
         }
 
 
@@ -153,7 +182,7 @@
 
 <!--header-->
 <div class="header">
-    <h2> Twitter </h2> </div>
+    <a href="#" class="logo"> Twitter </a> </div>
 
 <!--navigation bar-->
 <div class="topnav">
@@ -161,8 +190,8 @@
 
 
   {% if myuser %}
-
-     <p style="color:Red"> {{ myuser.user_name }}</p>
+<div>
+     <b>Welcome :<font color="#228b22"> {{ myuser.user_name }}</b>  </font></div>
 <ul>
 
   <li><a class="active" href="#home">Home</a></li>
@@ -216,21 +245,22 @@
 
 
 <div class="container">
-  <ul>
+
 {% for posts in postss %}
       <form method="Get">
-<li>
+
        <img src="/view_photo/{{posts.avatar}}" class="thumbnail">
       <h3><a href="/edit?user_id={{ posts.user_id }}">{{ posts.user_name }}</a></h3>
-      <p>{{posts.share_text}}</p>
-      <p align="right"> {{posts.time}}</p>
+          <p><b>{{posts.share_text}}</b></p>
+      <p > {{posts.time}}</p>
 
     {% if posts.user_id ==  myuser.key.id() %}
         <input type="hidden" value="{{ posts.key.id() }}" name ="posts_id" hidden/>
         <input type="submit" value="Delete" name = "query_type"/>
         <input type="submit" value="Edit" name = "query_type"/>
+
     {% endif %}
-</li>
+
           </form>
 
 {% endfor %}
@@ -241,7 +271,7 @@
 {% endif %}
 
 {% else %}
-<h1 >Welcome to Twitter!
+<h1 >
     <button    onclick="location.href='{{ url }}'" type="button">
         LOGIN
     </button>
