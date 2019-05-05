@@ -1,5 +1,5 @@
 from google.appengine.ext import ndb
-from tweet import Tweet
+from posts import Posts
 
 class MyUser(ndb.Model):
     email_address = ndb.StringProperty()
@@ -11,5 +11,5 @@ class MyUser(ndb.Model):
     last_name = ndb.StringProperty()
     dob = ndb.DateProperty()
 
-    tweet_ids = ndb.IntegerProperty(repeated=True)
+    posts_ids = ndb.IntegerProperty(repeated=True)
     user_following = ndb.StringProperty(repeated=True)
